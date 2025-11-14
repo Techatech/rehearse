@@ -7,13 +7,16 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# Copy shared directory first
+# Install axios at root level for shared code
+RUN npm init -y && npm install axios@^1.13.2
+
+# Copy shared directory
 COPY shared ./shared
 
 # Copy admin package files
 COPY admin/package*.json ./admin/
 
-# Install dependencies
+# Install admin dependencies
 WORKDIR /app/admin
 RUN npm ci --production=false
 

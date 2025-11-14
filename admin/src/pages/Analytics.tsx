@@ -3,7 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import Navigation from '../components/Navigation';
 import StatCard from '../components/StatCard';
 import { adminApi } from '../../../shared/api/client';
-import { TrendingUp, Users, DollarSign, Activity, Loader2, AlertCircle } from 'lucide-react';
+import type { UserActivity } from '../../../shared/types';
+import { TrendingUp, Users, DollarSign, Activity, Loader2 } from 'lucide-react';
 
 export default function Analytics() {
   const [activityPage, setActivityPage] = useState(1);
@@ -112,7 +113,7 @@ export default function Analytics() {
                       </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                      {activities.map((activity, index: number) => (
+                      {activities.map((activity: UserActivity, index: number) => (
                         <tr key={activity.id || index} className="hover:bg-gray-50">
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div>
