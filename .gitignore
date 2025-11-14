@@ -1,0 +1,236 @@
+# ============================================================================
+# SENSITIVE DATA - NEVER COMMIT THESE!
+# ============================================================================
+
+# Environment variables with API keys and secrets
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+*.env
+*.env.local
+
+# API Keys and Secrets
+*api*key*
+*secret*
+*secrets*
+*.pem
+*.key
+*.p12
+*.pfx
+!public.key
+
+# Credentials
+credentials.json
+secrets.json
+config.local.json
+.credentials
+auth.json
+
+# Stripe keys
+stripe_*.txt
+stripe-*.json
+
+# WorkOS keys
+workos_*.txt
+workos-*.json
+
+# Cerebras keys
+cerebras_*.txt
+cerebras-*.json
+
+# ElevenLabs keys
+elevenlabs_*.txt
+elevenlabs-*.json
+
+# ============================================================================
+# PROJECT SPECIFIC
+# ============================================================================
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+.pnpm-store/
+
+# Testing
+coverage/
+*.lcov
+.nyc_output/
+test-results/
+
+# Production builds
+dist/
+build/
+.next/
+out/
+frontend/dist/
+admin/dist/
+
+# Raindrop / LiquidMetal
+.raindrop/
+.raindrop-cache/
+
+# Local Netlify folder
+.netlify
+
+# Database files (contain user data)
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+*.sqlite3-journal
+db/*.db
+prisma/*.db
+
+# ============================================================================
+# LOGS AND DEBUG
+# ============================================================================
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-debug.log
+combined.log
+error.log
+
+# Debug
+.vite-inspect/
+debug/
+*.tsbuildinfo
+
+# ============================================================================
+# EDITOR AND OS
+# ============================================================================
+
+# Editor directories and files
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+*.code-workspace
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.AppleDouble
+.LSOverride
+Icon
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ============================================================================
+# BUILD AND CACHE
+# ============================================================================
+
+# Cache
+.cache/
+.parcel-cache/
+.turbo/
+.eslintcache
+.stylelintcache
+*.tsbuildinfo
+.npm/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# ============================================================================
+# DEPLOYMENT AND DOCKER
+# ============================================================================
+
+# Docker
+.dockerignore.local
+docker-compose.override.yml
+.docker/
+
+# Deployment configs with secrets
+wrangler.toml.local
+netlify.toml.local
+
+# ============================================================================
+# TEMPORARY AND BACKUP
+# ============================================================================
+
+# Temporary files
+*.tmp
+temp/
+tmp/
+.temp/
+
+# Backup files
+*.bak
+*.backup
+*.old
+*~.nib
+*-backup.*
+
+# ============================================================================
+# MISC
+# ============================================================================
+
+# Local development overrides
+.local
+local.config.js
+*.local.js
+*.local.ts
+
+# Test files that might contain sensitive data
+test-data/
+fixtures/*.local.*
+
+# SSL certificates (if any)
+*.crt
+*.cert
+*.ca-bundle
+
+# SSH keys
+id_rsa
+id_rsa.pub
+known_hosts
+
+# macOS
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+[Tt]humbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk

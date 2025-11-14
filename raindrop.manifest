@@ -1,0 +1,57 @@
+application "rehearse" {
+
+  env "CEREBRAS_API_KEY" {
+    secret = true
+  }
+
+  env "ELEVENLABS_API_KEY" {
+    secret = true
+  }
+
+  env "WORKOS_API_KEY" {
+    secret = true
+  }
+
+  env "WORKOS_CLIENT_ID" {
+    secret = false
+  }
+
+  env "WORKOS_REDIRECT_URI" {
+    secret = false
+  }
+
+  env "STRIPE_SECRET_KEY" {
+    secret = true
+  }
+
+  env "STRIPE_WEBHOOK_SECRET" {
+    secret = true
+  }
+
+  env "ADMIN_WORKOS_REDIRECT_URI" {
+    secret = false
+  }
+
+  env "ADMIN_FRONTEND_URL" {
+    secret = false
+  }
+
+  service "rehearse-api" {
+    visibility = "public"
+    domain {
+      cname = "rehearse-api"
+    }
+  }
+
+  sql_database "rehearse-db" {
+  }
+
+  smartbucket "rehearse-smart-buckets" {
+  }
+
+  smartsql "rehearse-smart-sql" {
+  }
+
+  smartmemory "rehearse-smart-memory" {
+  }
+}
