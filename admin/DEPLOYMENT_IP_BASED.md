@@ -1,11 +1,11 @@
-# Admin Dashboard Deployment - IP-Based (100.68.91.200)
+# Admin Dashboard Deployment - IP-Based (216.155.142.123)
 
-Deploy the admin dashboard to Vultr VPS accessible via IP address `100.68.91.200`.
+Deploy the admin dashboard to Vultr VPS accessible via IP address `216.155.142.123`.
 
 ## Configuration Summary
 
 **URLs:**
-- Admin Dashboard: `http://100.68.91.200` (or `https://100.68.91.200` with SSL)
+- Admin Dashboard: `http://216.155.142.123` (or `https://216.155.142.123` with SSL)
 - Backend API: `https://rehearse-api.01k8kpv1gr6b34n7ftxj2whn2x.lmapp.run`
 - Frontend: (current configuration maintained)
 
@@ -25,7 +25,7 @@ Create production environment file:
 cat > .env.production << 'EOF'
 VITE_API_URL=https://rehearse-api.01k8kpv1gr6b34n7ftxj2whn2x.lmapp.run
 VITE_ADMIN_WORKOS_CLIENT_ID=your_workos_client_id_here
-VITE_ADMIN_WORKOS_REDIRECT_URI=http://100.68.91.200/auth/callback
+VITE_ADMIN_WORKOS_REDIRECT_URI=http://216.155.142.123/auth/callback
 EOF
 ```
 
@@ -55,12 +55,12 @@ git push -u origin main
 
 ---
 
-## Part 2: Deploy to VPS (100.68.91.200)
+## Part 2: Deploy to VPS (216.155.142.123)
 
 ### Step 1: Access Vultr Console
 
 1. Log into Vultr dashboard
-2. Click on your VPS instance (IP: 100.68.91.200)
+2. Click on your VPS instance (IP: 216.155.142.123)
 3. Click "View Console" button
 4. Log in as root
 
@@ -100,9 +100,14 @@ cd rehearse/admin
 
 ### Step 4: Build Docker Image
 
+**IMPORTANT:** The Docker build must be run from the repository root (not from the admin directory) because the admin app depends on the shared directory.
+
 ```bash
-# Build Docker image
-docker build -t rehearse-admin .
+# Navigate to repository root
+cd /var/www/rehearse
+
+# Build Docker image from root (using -f flag to specify Dockerfile location)
+docker build -f admin/Dockerfile -t rehearse-admin .
 
 # Verify image was created
 docker images | grep rehearse-admin
@@ -184,7 +189,7 @@ ufw status
 
 ### Step 8: Verify Deployment
 
-Open browser and visit: `http://100.68.91.200`
+Open browser and visit: `http://216.155.142.123`
 
 You should see the admin login page.
 
@@ -205,7 +210,7 @@ Check current CORS settings in `/src/rehearse-api/index.ts` and ensure it includ
 ```typescript
 private addCorsHeaders(response: Response): Response {
   const headers = new Headers(response.headers);
-  headers.set('Access-Control-Allow-Origin', 'http://100.68.91.200');
+  headers.set('Access-Control-Allow-Origin', 'http://216.155.142.123');
   headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   headers.set('Access-Control-Allow-Credentials', 'true');
@@ -229,7 +234,7 @@ private addCorsHeaders(response: Response): Response {
 1. Go to WorkOS Dashboard: https://dashboard.workos.com
 2. Navigate to your application
 3. Go to "Redirects" section
-4. Add new redirect URI: `http://100.68.91.200/auth/callback`
+4. Add new redirect URI: `http://216.155.142.123/auth/callback`
 5. Save changes
 
 ### Set Backend Environment Variables
@@ -238,8 +243,8 @@ private addCorsHeaders(response: Response): Response {
 cd /home/charles/rehearse
 
 # Set environment variables for Raindrop
-export ADMIN_WORKOS_REDIRECT_URI=http://100.68.91.200/auth/callback
-export ADMIN_FRONTEND_URL=http://100.68.91.200
+export ADMIN_WORKOS_REDIRECT_URI=http://216.155.142.123/auth/callback
+export ADMIN_FRONTEND_URL=http://216.155.142.123
 
 # Deploy updated backend
 raindrop build deploy
@@ -257,7 +262,7 @@ If you want HTTPS, you need a domain name (Let's Encrypt doesn't issue certifica
 - freedns.afraid.org
 
 **Option 2: Use your own domain**
-- Point subdomain to 100.68.91.200
+- Point subdomain to 216.155.142.123
 - Then use Let's Encrypt
 
 **For now, HTTP is sufficient for internal admin use.**
@@ -289,9 +294,8 @@ cd /var/www/rehearse
 # Pull latest changes
 git pull origin main
 
-# Rebuild and restart
-cd admin
-docker build -t rehearse-admin .
+# Rebuild and restart (must build from root directory)
+docker build -f admin/Dockerfile -t rehearse-admin .
 docker stop rehearse-admin
 docker rm rehearse-admin
 docker run -d \
@@ -303,7 +307,7 @@ docker run -d \
 
 ### Automated Update Script
 
-Create deployment script:
+The repository includes a deployment script at `/var/www/rehearse/deploy-admin.sh`. If it doesn't exist, create it:
 
 ```bash
 cat > /var/www/rehearse/deploy-admin.sh << 'EOF'
@@ -312,13 +316,23 @@ set -e
 
 echo "🚀 Deploying Rehearse Admin Dashboard..."
 
+# Ensure we're in the repository root
 cd /var/www/rehearse
+
+# Pull latest changes
 git pull origin main
 
-cd admin
-docker build -t rehearse-admin .
-docker stop rehearse-admin || true
-docker rm rehearse-admin || true
+# Build Docker image from repository root
+echo "📦 Building Docker image..."
+docker build -f admin/Dockerfile -t rehearse-admin .
+
+# Stop and remove existing container
+echo "🛑 Stopping existing container..."
+docker stop rehearse-admin 2>/dev/null || true
+docker rm rehearse-admin 2>/dev/null || true
+
+# Run new container
+echo "▶️  Starting new container..."
 docker run -d \
   --name rehearse-admin \
   --restart unless-stopped \
@@ -326,8 +340,9 @@ docker run -d \
   rehearse-admin
 
 echo "✅ Deployment complete!"
-echo "🌐 Admin dashboard: http://100.68.91.200"
-
+echo "🌐 Admin dashboard: http://216.155.142.123"
+echo ""
+echo "📊 Container status:"
 docker ps | grep rehearse-admin
 EOF
 
@@ -336,12 +351,30 @@ chmod +x /var/www/rehearse/deploy-admin.sh
 
 **Future deployments:**
 ```bash
-/var/www/rehearse/deploy-admin.sh
+cd /var/www/rehearse
+git pull origin main
+./deploy-admin.sh
 ```
 
 ---
 
 ## Part 7: Troubleshooting
+
+### Docker Build Fails with "shared: not found"
+
+If you see an error like `"/shared": not found` during the Docker build, it means you're trying to build from the wrong directory. The admin app depends on the `shared` directory at the repository root.
+
+**Solution:**
+```bash
+# Make sure you're in the repository root
+cd /var/www/rehearse
+
+# Build from root using -f flag
+docker build -f admin/Dockerfile -t rehearse-admin .
+
+# DO NOT run this (will fail):
+# cd admin && docker build -t rehearse-admin .
+```
 
 ### Check Docker Container
 
@@ -374,7 +407,7 @@ systemctl restart nginx
 
 ```bash
 # From your local machine, test if port 80 is accessible
-curl http://100.68.91.200
+curl http://216.155.142.123
 
 # From VPS, check if Docker container is responding
 curl http://localhost:8080
@@ -384,22 +417,22 @@ curl http://localhost:8080
 
 1. Check browser console for CORS errors
 2. Verify API URL is correct: `https://rehearse-api.01k8kpv1gr6b34n7ftxj2whn2x.lmapp.run`
-3. Verify WorkOS redirect URI: `http://100.68.91.200/auth/callback`
-4. Check backend CORS allows `http://100.68.91.200`
+3. Verify WorkOS redirect URI: `http://216.155.142.123/auth/callback`
+4. Check backend CORS allows `http://216.155.142.123`
 
 ---
 
 ## Summary
 
 **Configuration:**
-- ✅ Admin Dashboard: http://100.68.91.200
+- ✅ Admin Dashboard: http://216.155.142.123
 - ✅ Backend API: https://rehearse-api.01k8kpv1gr6b34n7ftxj2whn2x.lmapp.run
 - ✅ Docker + Nginx setup
 - ✅ Auto-restart on server reboot
 - ✅ GitHub-based deployment workflow
 
 **Access:**
-- Open browser: http://100.68.91.200
+- Open browser: http://216.155.142.123
 - Click "Sign in with WorkOS"
 - Authenticate with admin account
 - Access admin dashboard

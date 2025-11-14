@@ -1,4 +1,4 @@
-import { corsDisabled } from '@liquidmetal-ai/raindrop-framework/core/cors';
+import { createCorsHandler } from '@liquidmetal-ai/raindrop-framework/core/cors';
 
 /**
  * cors is the application-wide CORS (Cross-Origin Resource Sharing) handler.
@@ -61,4 +61,17 @@ import { corsDisabled } from '@liquidmetal-ai/raindrop-framework/core/cors';
  * };
  * ```
  */
-export const cors = corsDisabled;
+
+// Allow requests from the frontend and admin dashboard
+export const cors = createCorsHandler({
+  origin: [
+    'https://capable-fairy-fa3b2a.netlify.app', // Frontend (production)
+    'http://216.155.142.123',                    // Admin dashboard (production)
+    'http://localhost:5173',                     // Frontend (local dev)
+    'http://localhost:5174',                     // Admin dashboard (local dev)
+  ],
+  allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  maxAge: 86400, // Cache preflight for 24 hours
+});

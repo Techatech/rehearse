@@ -30,10 +30,12 @@ application "rehearse" {
 
   env "ADMIN_WORKOS_REDIRECT_URI" {
     secret = false
+    default = "http://216.155.142.123/auth/callback"
   }
 
   env "ADMIN_FRONTEND_URL" {
     secret = false
+    default = "http://216.155.142.123"
   }
 
   service "rehearse-api" {

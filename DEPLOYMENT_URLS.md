@@ -11,7 +11,7 @@ Quick reference for all deployment URLs and configurations.
 
 ### Production
 - **Frontend**: https://capable-fairy-fa3b2a.netlify.app
-- **Admin Dashboard**: http://100.68.91.200
+- **Admin Dashboard**: http://216.155.142.123
 - **Backend API**: https://rehearse-api.01k8kpv1gr6b34n7ftxj2whn2x.lmapp.run
 
 ## Infrastructure
@@ -33,7 +33,7 @@ Quick reference for all deployment URLs and configurations.
 
 ### Admin Dashboard (Vultr VPS)
 - **Platform**: Vultr VPS
-- **IP Address**: 100.68.91.200
+- **IP Address**: 216.155.142.123
 - **Location**: Chicago, USA
 - **OS**: Debian 12
 - **Container**: Docker + Nginx
@@ -53,8 +53,8 @@ WORKOS_CLIENT_ID=<your_workos_client_id>
 WORKOS_REDIRECT_URI=https://capable-fairy-fa3b2a.netlify.app/auth/callback
 STRIPE_SECRET_KEY=<your_stripe_secret_key>
 STRIPE_WEBHOOK_SECRET=<your_stripe_webhook_secret>
-ADMIN_WORKOS_REDIRECT_URI=http://100.68.91.200/auth/callback
-ADMIN_FRONTEND_URL=http://100.68.91.200
+ADMIN_WORKOS_REDIRECT_URI=http://216.155.142.123/auth/callback
+ADMIN_FRONTEND_URL=http://216.155.142.123
 ```
 
 ### Frontend (Netlify)
@@ -72,7 +72,7 @@ Stored in `/home/charles/rehearse/admin/.env.production`:
 ```env
 VITE_API_URL=https://rehearse-api.01k8kpv1gr6b34n7ftxj2whn2x.lmapp.run
 VITE_ADMIN_WORKOS_CLIENT_ID=<your_workos_client_id>
-VITE_ADMIN_WORKOS_REDIRECT_URI=http://100.68.91.200/auth/callback
+VITE_ADMIN_WORKOS_REDIRECT_URI=http://216.155.142.123/auth/callback
 ```
 
 ## WorkOS Configuration
@@ -82,7 +82,7 @@ VITE_ADMIN_WORKOS_REDIRECT_URI=http://100.68.91.200/auth/callback
 - **OAuth State**: `user` (or omitted)
 
 ### Admin Dashboard
-- **Redirect URI**: `http://100.68.91.200/auth/callback`
+- **Redirect URI**: `http://216.155.142.123/auth/callback`
 - **OAuth State**: `admin`
 - **Same WorkOS Application**: Yes (differentiates via state parameter)
 
@@ -157,7 +157,7 @@ docker run -d --name rehearse-admin --restart unless-stopped -p 8080:80 rehearse
 ### Health Checks
 - **Backend**: https://rehearse-api.01k8kpv1gr6b34n7ftxj2whn2x.lmapp.run/health
 - **Frontend**: https://capable-fairy-fa3b2a.netlify.app (Netlify provides uptime monitoring)
-- **Admin**: http://100.68.91.200/health
+- **Admin**: http://216.155.142.123/health
 
 ### Logs
 - **Backend**: `raindrop logs tail`

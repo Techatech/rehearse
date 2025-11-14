@@ -11,7 +11,7 @@
 [![React](https://img.shields.io/badge/React-18-61dafb)](https://reactjs.org/)
 [![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Workers-f38020)](https://workers.cloudflare.com/)
 
-[Frontend Demo](https://capable-fairy-fa3b2a.netlify.app) · [Admin Dashboard](http://100.68.91.200) · [Documentation](./admin/DEPLOYMENT_IP_BASED.md) · [Report Bug](https://github.com/yourusername/rehearse/issues)
+[Frontend Demo](https://capable-fairy-fa3b2a.netlify.app) · [Admin Dashboard](http://216.155.142.123) · [Documentation](./admin/DEPLOYMENT_IP_BASED.md) · [Report Bug](https://github.com/yourusername/rehearse/issues)
 
 </div>
 
@@ -283,7 +283,7 @@ See [admin/DEPLOYMENT_IP_BASED.md](./admin/DEPLOYMENT_IP_BASED.md) for complete 
 3. Clone repository from GitHub via Vultr console
 4. Build and run Docker container
 5. Configure Nginx reverse proxy
-6. Access at http://100.68.91.200
+6. Access at http://216.155.142.123
 
 ---
 
@@ -299,7 +299,7 @@ The admin dashboard provides comprehensive management capabilities:
 ### Accessing Admin Dashboard
 
 **Development**: http://localhost:5174
-**Production**: http://100.68.91.200
+**Production**: http://216.155.142.123
 
 ### Admin Setup
 
