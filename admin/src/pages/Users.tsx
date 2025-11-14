@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Navigation from '../components/Navigation';
 import { adminApi } from '../../../shared/api/client';
+import type { AdminUser } from '../../../shared/types';
 import { Search, Loader2, AlertCircle, Calendar, Clock, TrendingUp } from 'lucide-react';
 
 export default function Users() {
@@ -101,7 +102,7 @@ export default function Users() {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {users.map((user) => (
+                    {users.map((user: AdminUser) => (
                       <tr key={user.id} className="hover:bg-gray-50">
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div>

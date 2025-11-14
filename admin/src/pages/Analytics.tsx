@@ -112,7 +112,7 @@ export default function Analytics() {
                       </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                      {activities.map((activity, index) => (
+                      {activities.map((activity, index: number) => (
                         <tr key={activity.id || index} className="hover:bg-gray-50">
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div>
