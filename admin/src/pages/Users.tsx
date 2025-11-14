@@ -17,7 +17,7 @@ export default function Users() {
   });
 
   const users = data?.data.users || [];
-  const totalPages = data?.data.totalPages || 1;
+  const totalPages = data?.data.total ? Math.ceil(data.data.total / limit) : 1;
 
   return (
     <div className="flex h-screen bg-gray-100">

@@ -146,7 +146,7 @@ export default function SystemHealth() {
                   <div>
                     <p className="text-sm text-gray-600 mb-1">Last Check</p>
                     <p className="text-sm font-medium text-gray-900">
-                      {new Date(healthData.timestamp).toLocaleString()}
+                      {new Date().toLocaleString()}
                     </p>
                   </div>
                   <div>
