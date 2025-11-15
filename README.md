@@ -413,7 +413,6 @@ Contributions are welcome! Please follow these steps:
 
 - Revenue charts in admin dashboard are placeholders (Stripe integration pending)
 - System logs in admin dashboard require external logging service integration
-- Persona CRUD operations have backend support but UI modals pending
 
 ---
 
@@ -440,7 +439,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Authors
 
-- **Your Name** - *Initial work* - [YourGitHub](https://github.com/yourusername)
+- **Charles Tafadzwa Chimhande** - *Initial work* - [YourGitHub](https://github.com/Techatech)
 
 ---
 
@@ -460,8 +459,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 - Email: support@rehearse.ai
-- Issues: [GitHub Issues](https://github.com/yourusername/rehearse/issues)
-- Discussions: [GitHub Discussions](https://github.com/yourusername/rehearse/discussions)
+- Issues: [GitHub Issues](https://github.com/Techatech/rehearse/issues)
+- Discussions: [GitHub Discussions](https://github.com/Techatech/rehearse/discussions)
 
 ---
 
@@ -480,6 +479,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Made with ❤️ by the Rehearse team
 
-[Website](https://capable-fairy-fa3b2a.netlify.app) · [Twitter](https://twitter.com/rehearseai) · [LinkedIn](https://linkedin.com/company/rehearse)
+[Website](https://capable-fairy-fa3b2a.netlify.app) 
 
 </div>
