@@ -439,7 +439,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Authors
 
-- **Charles Tafadzwa Chimhande** - *Initial work* - [YourGitHub](https://github.com/Techatech)
+- **Charles Tafadzwa Chimhande** - *Initial work* - [GitHub](https://github.com/Techatech)
 
 ---
 
